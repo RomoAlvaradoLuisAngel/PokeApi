@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} PokeApi - Inicio {% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Buscar Pokémon</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/buscar">
+                        <div class="mb-3">
+                            <label for="pokemon_name" class="form-label fw-bold">Nombre del Pokémon:</label>
+                </div>
+            </div>
+        </div>
+    </div>      
+</div>  
+
+{% endblock %}
