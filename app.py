@@ -14,10 +14,13 @@ def ser_pokemon():
     pokemon_name = request.form.get('pokemon_name', '')
     
     if not pokemon_name:
-        flash('Por favor, ingrese un nombre de Pokémon.', 'error')
+        flash('Por favor, ingrese un nombre de Pokemon.', 'error')
         return redirect(url_for('index'))
 try:
-    respon
+    response = requests.get(f"{API_URL}{pokemon_name}")
+    if response.status_code == 200:
+        pokemon_data = resp.json()
+        return render_template('resultado.html', pokemon=pokemon_data)##puede ser pokemon.html bb
     
 
 if __name__ == '__main__':
