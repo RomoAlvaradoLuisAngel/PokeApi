@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import requests
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'
+app.secret_key = 'supersecretkey' ##Necesario para usar flask con form
 API_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
 @app.route('/')
@@ -19,8 +19,22 @@ def ser_pokemon():
 try:
     response = requests.get(f"{API_URL}{pokemon_name}")
     if response.status_code == 200:
-        pokemon_data = resp.json()
+        pokemon_data = response.json()
+        
+        pokemon_info = {
+            'name': pokemon_data['name'].title(),
+            'id': pokemon_data['id'],
+            'height': pokemon_data['height'],
+            'weight': pokemon_data['weight'],
+            'image': pokemon_data['sprites']['front_default'],
+            'types': [t['type']['name'].title() for t in pokemon_data['type']],
+            'abilities': [a['abilities']['name'].title() for a in pokemon_data['type']]
+        }    
         return render_template('resultado.html', pokemon=pokemon_data)##puede ser pokemon.html bb
+    else:
+        flash(f'Pokemon "{pokemon_name}" no encontrado', 'error')
+        return redirect(url_for('index'))
+    
     
 
 if __name__ == '__main__':
