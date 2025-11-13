@@ -16,23 +16,26 @@ def ser_pokemon():
     if not pokemon_name:
         flash('Por favor, ingrese un nombre de Pokemon.', 'error')
         return redirect(url_for('index'))
-try:
-    response = requests.get(f"{API_URL}{pokemon_name}")
-    if response.status_code == 200:
-        pokemon_data = response.json()
+    try:
+        response = requests.get(f"{API_URL}{pokemon_name}")
+        if response.status_code == 200:
+            pokemon_data = response.json()
         
-        pokemon_info = {
-            'name': pokemon_data['name'].title(),
-            'id': pokemon_data['id'],
-            'height': pokemon_data['height'],
-            'weight': pokemon_data['weight'],
-            'image': pokemon_data['sprites']['front_default'],
-            'types': [t['type']['name'].title() for t in pokemon_data['type']],
-            'abilities': [a['abilities']['name'].title() for a in pokemon_data['type']]
-        }    
-        return render_template('resultado.html', pokemon=pokemon_data)##puede ser pokemon.html bb
-    else:
-        flash(f'Pokemon "{pokemon_name}" no encontrado', 'error')
+            pokemon_info = {
+                'name': pokemon_data['name'].title(),
+                'id': pokemon_data['id'],
+                'height': pokemon_data['height'],
+                'weight': pokemon_data['weight'],
+                'image': pokemon_data['sprites']['front_default'],
+                'types': [t['type']['name'].title() for t in pokemon_data['types']],
+                'abilities': [a['ability']['name'].title() for a in pokemon_data['abilities']]
+            }    
+            return render_template('resultado.html', pokemon=pokemon_info)##puede ser pokemon.html bb
+        else:
+            flash(f'Pokemon "{pokemon_name}" no encontrado', 'error')
+        return redirect(url_for('index'))
+    except requests.exceptions.RequestException as e:
+        flash('Error al conectar con la API de Pokemon.', 'error')
         return redirect(url_for('index'))
     
     

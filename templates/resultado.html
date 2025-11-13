@@ -1,9 +1,29 @@
 {% extends 'base.html' %}
 
-{% block title %} {pokemon_name} {% endblock %}
+{% block title %} {{ pokemon_name }} {% endblock %}
 
 {% block contenido %}
 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center bg-success text-white">
+                    <h3>Información del Pokémon</h3>
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{ pokemon.name }}</h4>
+                    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" class="img-fluid mb-3" style="max-width: 200px;">
+                    <p class="card-text"><strong>Altura:</strong> {{ pokemon.height }} dm</p>
+                    <p class="card-text"><strong>Peso:</strong> {{ pokemon.weight }} hg</p>
+                    <p class="card-text"><strong>Tipos:</strong> {{ pokemon.types | join(', ') }}</p>
+                    <p class="card-text"><strong>Habilidades:</strong> {{ pokemon.abilities | join(', ') }}</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>      
+</div>
 
 
 {% endblock %}

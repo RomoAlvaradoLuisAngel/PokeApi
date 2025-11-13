@@ -12,15 +12,17 @@
                     <h3>Buscar Pokémon</h3>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="/buscar">
-                        <div class="mb-3">
-                            <label for="pokemon_name" class="form-label fw-bold">Nombre del Pokémon:</label>
-                </div>
-                <button type="submit" class="btn btn-info">Info</button>
+                    <form method="POST" action="/search">
+                        <div class="mb-3 text-center">
+                            <label for="exampleInputEmail1" class="form-label">BUSCA POKEMONES</label>
+                                    <input type="text" class="form-control" id="pokemon_name" aria-describedby="buscar" name="pokemon_name" placeholder="Ingrese el nombre del Pokémon">
+                        </div>
+                <button type="submit" class="btn btn-info">Buscar</button>
+                    </form>
             </div>
-        </div>
+        </div> 
     </div>      
 </div>  
-</form>
+
 
 {% endblock %}
